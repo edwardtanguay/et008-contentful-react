@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const PageBooksWithGraphql = () => {
 
 	const space = import.meta.env.VITE_SPACE_ID;
@@ -18,17 +20,29 @@ export const PageBooksWithGraphql = () => {
 		}	
 	`;
 	(async () => {
-		const response = await fetch(
+
+		// FETCH
+		// const response = await fetch(
+		// 	url,
+		// 	{
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 		},
+		// 		body: JSON.stringify({ query }),
+		// 	}
+		// );
+		// const _books = await response.json();
+
+		// AXIOS
+		const response = await axios({
 			url,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ query }),
+			method: 'post',
+			data: {
+				query
 			}
-		);
-		const _books = await response.json();
+		});
+		const _books = response.data;
 		console.log(_books);
 	})();
 
