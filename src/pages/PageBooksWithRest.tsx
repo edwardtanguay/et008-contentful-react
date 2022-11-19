@@ -8,7 +8,7 @@ interface IBook {
 	imageUrl: string;
 }
 
-export const PageBooks = () => {
+export const PageBooksWithRest = () => {
 	const [books, setBooks] = useState<IBook[]>([]);
 
 	useEffect(() => {
