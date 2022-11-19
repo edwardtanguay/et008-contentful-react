@@ -1,20 +1,25 @@
 export const PageBooksWithGraphql = () => {
+
+	const space = import.meta.env.VITE_SPACE_ID;
+	const accessToken = import.meta.env.VITE_ACCESS_TOKEN;
+	const url = `https://graphql.contentful.com/content/v1/spaces/${space}?access_token=${accessToken}`;
+
 	const query = `
-{
-  bookCollection {
-    items {
-      title
-      description
-      bookImage {
-        url
-      }
-    }
-  }
-}	
+		{
+			bookCollection {
+				items {
+				title
+				description
+					bookImage {
+						url
+					}
+				}
+			}
+		}	
 	`;
 	(async () => {
 		const response = await fetch(
-			'https://graphql.contentful.com/content/v1/spaces/ksa3691cd4ua?access_token=HybRmB8-wshplsjKMC_-UWyHW9xR82Zc8UiFL6jg518',
+			url,
 			{
 				method: 'POST',
 				headers: {
@@ -24,6 +29,7 @@ export const PageBooksWithGraphql = () => {
 			}
 		);
 		const _books = await response.json();
+		console.log(_books);
 	})();
 
 	return (
