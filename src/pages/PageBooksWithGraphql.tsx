@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface IBook {
-	id: string;
+	sys: {
+		id: string
+	}
 	title: string;
 	description: string;
 	bookImage: {
@@ -17,6 +19,9 @@ const query = `
 		{
 			bookCollection {
 				items {
+					sys {
+						id
+					}
 					title
 					description
 					bookImage {
@@ -65,9 +70,9 @@ export const PageBooksWithGraphql = () => {
 		<div className="page pageBooksWithGraphql">
 			<p>There are {books.length} books:</p>
 			<div className="books">
-				{books.map((book, i) => {
+				{books.map((book) => {
 					return (
-						<div className="book" key={i}>
+						<div className="book" key={book.sys.id}>
 							<img src={book.bookImage.url} />
 							<div className="info">
 								<div className="title">{book.title}</div>
